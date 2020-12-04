@@ -60,7 +60,7 @@ COPY start.sh /usr/sbin/
 RUN chmod +x /usr/sbin/start.sh
 
 # Volumes
-mkdir -p /var/www/html/clevva
+RUN mkdir -p /var/www/html/clevva
 VOLUME /var/www/html/clevva
 
 # Ports

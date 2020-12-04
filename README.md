@@ -1,30 +1,31 @@
-[Bitbucket Pipelines](https://bitbucket.org/product/features/pipelines) [Docker](https://www.docker.com/) image based on [Ubuntu](https://hub.docker.com/_/ubuntu/).
+[Bitbucket Pipelines](https://bitbucket.org/product/features/pipelines) [Docker](https://www.docker.com/) image based on [PHP's official image](https://hub.docker.com/_/php).
 
-## Packages installed
-- [Node.js](https://nodejs.org/) `8.11`
-- [NPM](https://www.npmjs.com/) `5.6`
-  - [Gulp](http://gulpjs.com/), [Webpack](https://webpack.github.io/), [Mocha](https://mochajs.org/), [Grunt](http://gruntjs.com/), [Codeception](https://codeception.com/), [Yarn](https://yarnpkg.com/)
-- [Perl](https://www.perl.org/) `5.22`
-- [PHP](http://www.php.net/) `7.2`
-  - `bcmath`,`bz2`,`cgi`,`cli`,`common`,`curl`,`dev`,`enchant`,`fpm`,`gd`,`gmp`,`imap`,`interbase`,`intl`,`json`,`ldap`,`mbstring`,`mysql`,`odbc`,`opcache`,`pgsql`,`phpdbg`,`pspell`,`readline`,`snmp`,`sqlite3`,`sybase`,`tidy`,`xmlrpc`,`xsl`,`zip`,`xdebug`
-- [PHPUnit](https://phpunit.de/) `5.7.27`
-- [Python](https://www.python.org/) `2.7`
-- [Ruby](https://www.ruby-lang.org/) `2.3`
-- [Sencha CMD](http://docs.sencha.com/cmd/) `6.5.3.6`
-- [Composer](https://getcomposer.org/) `1.6.5`,
-- Other
-  - `apt-transport-https`, `bzip2`, `ca-certificates`, `clean-css-cli`, `curl`, `gettext`, `git`, `imagemagick`, `memcached`, `mysql-client`, `openjdk-7-jre`, `openssh-client`, `perl`, `python`, `python3`, `rsync`, `ruby`, `software-properties-common`, `subversion`, `unzip`, `uglify-js`, `wget`, `zip`
+## Core packages
+- [PHP](http://www.php.net/) `v7.4`
+- [Apache](https://httpd.apache.org/) `v2.4`
 
-## Example - Build the image locally
+## Main packages
+- [Sencha CMD](http://docs.sencha.com/cmd/) `v7.3`
+- [Node.js](https://nodejs.org/) `v14.15`
+- [NPM](https://www.npmjs.com/) `v6.14`
+- [Composer](https://getcomposer.org/) `v2.0`
+
+## Other packages
+- [Perl](https://www.perl.org/) `v5.28`
+
+# Examples
+There are multiple ways to use this image. As you're most likely going to use it to build your CI/CD, it's very handy to test locally.
+
+## Example - Run container from local image
 ```SHELL
 git clone git@github.com:HendrikPrinsZA/bitbucket-apache-php.git && cd bitbucket-apache-php
 docker build . --tag bitbucket-apache-php-local
-docker run -it --volume=/var/www/html/project:/project --workdir="/project" --entrypoint=/bin/bash bitbucket-apache-php-local
+docker run -it --volume="/path/to/clevva:/var/www/html/clevva" --workdir="/var/www/html/clevva" --entrypoint=/bin/bash bitbucket-apache-php-local
 ```
 
-## Example - Remote image
+## Example - Run container from remote image
 ```SHELL
-docker run -it --volume=/var/www/html/project:/project --workdir="/project" --entrypoint=/bin/bash hendrikprinsza/bitbucket-apache-php
+docker run -it --volume="/path/to/clevva:/var/www/html/clevva" --workdir="/var/www/html/clevva" --entrypoint=/bin/bash hendrikprinsza/bitbucket-apache-php
 ```
 
 ## Example - Simulate [Bitbucket Pipelines](https://bitbucket.org/product/features/pipelines) locally
@@ -40,7 +41,7 @@ services:
             - 80:80
             - 443:443
         volumes:
-            - /var/www/html:/var/www/html
+            - /path/to/clevva:/var/www/html/clevva
         links:
             - bitbucket-mysql
 
