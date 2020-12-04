@@ -1,16 +1,16 @@
 [Bitbucket Pipelines](https://bitbucket.org/product/features/pipelines) [Docker](https://www.docker.com/) image based on [PHP's official image](https://hub.docker.com/_/php).
 
-## Core packages
+## Core
 - [PHP](http://www.php.net/) `v7.4`
 - [Apache](https://httpd.apache.org/) `v2.4`
 
-## Main packages
+## Build & compiler
 - [Sencha CMD](http://docs.sencha.com/cmd/) `v7.3`
 - [Node.js](https://nodejs.org/) `v14.15`
 - [NPM](https://www.npmjs.com/) `v6.14`
 - [Composer](https://getcomposer.org/) `v2.0`
 
-## Other packages
+## Other
 - [Perl](https://www.perl.org/) `v5.28`
 
 # Examples
