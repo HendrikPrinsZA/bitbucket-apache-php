@@ -74,6 +74,10 @@ RUN apt-get update && apt-get install -y \
 RUN pecl install pcov && \
     docker-php-ext-enable pcov
 
+# PHP xdebug
+RUN pecl install xdebug && \
+    docker-php-ext-enable pcov xdebug
+
 # Apache modules
 RUN a2enmod \
     rewrite \
@@ -81,14 +85,19 @@ RUN a2enmod \
     ssl
 
 # Apache config
-COPY apache.conf /etc/apache2/conf-enabled/69-bitbucket-apache-php.conf
+COPY 69-bitbucket-apache-php.conf /etc/apache2/conf-enabled/
+
+# PHP config
+RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
+COPY 69-bitbucket-apache-php.ini $PHP_INI_DIR/conf.d/
 
 # Clean & autoremove
 RUN apt-get autoclean -qy && apt-get clean -qy && apt-get autoremove -qy
 
 # Starting script
-COPY start.sh /usr/sbin/
-RUN chmod +x /usr/sbin/start.sh
+COPY config-script /usr/local/bin/
+RUN chmod +x /usr/local/bin/config-script
+RUN ["sh", "/usr/local/bin/config-script"]
 
 # Volumes
 VOLUME /var/www/html
@@ -97,4 +106,4 @@ VOLUME /var/www/html
 EXPOSE 80
 EXPOSE 443
 
-CMD ["/usr/sbin/start.sh"]
+# CMD ["/usr/local/bin/start.sh"]
