@@ -74,9 +74,10 @@ RUN apt-get update && apt-get install -y \
 RUN pecl install pcov && \
     docker-php-ext-enable pcov
 
+# (disabled) Not required for now
 # PHP xdebug
-RUN pecl install xdebug && \
-    docker-php-ext-enable pcov xdebug
+# RUN pecl install xdebug && \
+#     docker-php-ext-enable pcov xdebug
 
 # Apache modules
 RUN a2enmod \
