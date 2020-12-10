@@ -1,5 +1,8 @@
 [Bitbucket Pipelines](https://bitbucket.org/product/features/pipelines) [Docker](https://www.docker.com/) image based on [PHP's official image](https://hub.docker.com/_/php).
 
+# Overview
+This image was built to run the CI/CD in Bitbucket's Pipelines. It includes build, test, and deployment tools.
+
 ## Core
 - [PHP](http://www.php.net/) `v7.4`
 - [Apache](https://httpd.apache.org/) `v2.4`
@@ -35,13 +38,13 @@ version: '3'
 
 services:
     bitbucket-apache-php:
-        image: bitbucket-pipelines-ubuntu-local
+        image: hendrikprinsza/bitbucket-apache-php
         container_name: bitbucket-apache-php
         ports:
             - 80:80
             - 443:443
         volumes:
-            - /path/to/clevva:/var/www/html/clevva
+            - /path/to/local/web/root:/var/www/html
         links:
             - bitbucket-mysql
 
@@ -76,4 +79,6 @@ definitions:
       environment:
         MYSQL_DATABASE: my_database
         MYSQL_ROOT_PASSWORD: my_root_pass
+        MYSQL_USER: my_user
+        MYSQL_PASSWORD: my_user_pass
 ```
