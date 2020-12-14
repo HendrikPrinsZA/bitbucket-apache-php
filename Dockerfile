@@ -32,6 +32,7 @@ RUN apt-get install -qfy \
     vim \
     curl \
     ftp \
+    rsync \
     default-mysql-client \
     software-properties-common \
     build-essential
@@ -77,7 +78,7 @@ RUN pecl install pcov && \
 # (disabled) Not required for now
 # PHP xdebug
 # RUN pecl install xdebug && \
-#     docker-php-ext-enable pcov xdebug
+#     docker-php-ext-enable xdebug
 
 # Apache modules
 RUN a2enmod \
